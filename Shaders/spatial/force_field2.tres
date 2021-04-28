@@ -1,9 +1,6 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=2]
-
-[ext_resource path="res://hexes.png" type="Texture" id=1]
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
 
 [sub_resource type="Shader" id=1]
-
 code = "shader_type spatial;
 render_mode blend_add, depth_draw_opaque, cull_disabled;
 
@@ -49,12 +46,14 @@ void fragment() {
     ALPHA = base_color.a;
 }"
 
-[resource]
+[sub_resource type="OpenSimplexNoise" id=2]
 
+[sub_resource type="NoiseTexture" id=3]
+noise = SubResource( 2 )
+
+[resource]
 shader = SubResource( 1 )
-shader_param/base_color = Color( 1, 0.398438, 0, 0.160431 )
+shader_param/base_color = Color( 0.54902, 0.913725, 0.603922, 1 )
 shader_param/near_far = Vector2( 0.1, 100 )
 shader_param/hexes_scale = 20.0
-shader_param/hex_tex = ExtResource( 1 )
-_sections_unfolded = [ "shader_param" ]
-
+shader_param/hex_tex = SubResource( 3 )
